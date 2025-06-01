@@ -6,8 +6,8 @@ class SimpleCNN(nn.Module):
         super(SimpleCNN, self).__init__()
         self.conv1 = nn.Conv2d(1, 16, kernel_size=3, padding=1)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
-        self.fc1 = nn.Linear(32 * 7 * 7, 128)
-        self.fc2 = nn.Linear(128, 10)
+        self.fc1 = nn.Linear(32 * 7 * 7, 32)
+        self.fc2 = nn.Linear(32, 10)
         self.pool = nn.MaxPool2d(2, 2)
 
     def forward(self, x):
@@ -17,3 +17,15 @@ class SimpleCNN(nn.Module):
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return x
+    
+def print_model_params(model):
+    print(f"{'Layer':<30}{'Parameters'}")
+    print("-" * 50)
+    total = 0
+    for name, param in model.named_parameters():
+        if param.requires_grad:
+            param_count = param.numel()
+            total += param_count
+            print(f"{name:<30}{param_count}")
+    print("-" * 50)
+    print(f"{'Total':<30}{total}")

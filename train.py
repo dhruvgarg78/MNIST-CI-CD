@@ -5,6 +5,7 @@ import torchvision
 import torchvision.transforms as transforms
 from model_utils import SimpleCNN
 from datetime import datetime
+from model_utils import print_model_params
 
 transform = transforms.Compose([
     transforms.ToTensor(),
@@ -21,6 +22,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters())
 
 model.train()
+print_model_params(model)
 for epoch in range(1):
     for images, labels in train_loader:
         images, labels = images.to(device), labels.to(device)
