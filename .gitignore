@@ -1,0 +1,9 @@
+# Ignore MNIST data
+data/
+
+# Ignore PyTorch model files
+*.pt
+
+# Ignore Python cache
+__pycache__/
+*.pyc
